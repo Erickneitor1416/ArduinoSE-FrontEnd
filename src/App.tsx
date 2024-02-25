@@ -34,13 +34,9 @@ function App() {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(`${apiUrl}/data`);
         const jsonData = await response.json();
-        setData({
-          temperatura: jsonData[0],
-          humedad: jsonData[1],
-          luz: jsonData[2],
-        });
+        setData(jsonData);
       } catch (error) {
         console.error("Error al obtener datos:", error);
         setData({ temperatura: 25, humedad: 50, luz: 20 });
@@ -56,12 +52,8 @@ function App() {
     const checked = event.target.checked;
     setChecked(checked);
     try {
-      const response = await fetch(apiUrl, {
+      const response = await fetch(`${apiUrl}/led/${checked ? "on" : "off"}`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ led: checked }),
       });
       const jsonData = await response.json();
       console.log(jsonData);
