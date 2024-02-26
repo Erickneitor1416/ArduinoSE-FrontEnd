@@ -39,11 +39,11 @@ function App() {
         setData(jsonData);
       } catch (error) {
         console.error("Error al obtener datos:", error);
-        setData({ temperatura: 25, humedad: 50, luz: 20 });
+        setData({ temperatura: 18, humedad: 100, luz: 99 });
       }
     };
 
-    const interval = setInterval(fetchData, 1000);
+    const interval = setInterval(fetchData, 10000);
 
     return (): void => clearInterval(interval);
   }, []);
@@ -55,8 +55,8 @@ function App() {
       const response = await fetch(`${apiUrl}/led/${checked ? "on" : "off"}`, {
         method: "POST",
       });
-      const jsonData = await response.json();
-      console.log(jsonData);
+      //const jsonData = await response.json();
+      console.log(response);
     } catch (error) {
       setError(true);
       alert("Error al encender, inténtalo de nuevo");
@@ -141,7 +141,8 @@ function App() {
         variant="body2"
         color="textSecondary"
         align="center"
-        sx={{ mt: 3 }}>
+        sx={{ mt: 3 }}
+      >
         Autores: Gandhy Garcia, Kevin Caranqui, Erick Muñoz y Pablo Velez
       </Typography>
     </Box>
