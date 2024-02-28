@@ -36,6 +36,7 @@ function App() {
       try {
         const response = await fetch(`${apiUrl}/data`);
         const jsonData = await response.json();
+        console.log(jsonData);
         setData(jsonData);
       } catch (error) {
         console.error("Error al obtener datos:", error);
@@ -43,7 +44,7 @@ function App() {
       }
     };
 
-    const interval = setInterval(fetchData, 10000);
+    const interval = setInterval(fetchData, 6000);
 
     return (): void => clearInterval(interval);
   }, []);
