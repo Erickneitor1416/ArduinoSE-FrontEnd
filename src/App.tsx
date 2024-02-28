@@ -35,8 +35,9 @@ function App() {
     const fetchData = async (): Promise<void> => {
       try {
         const response = await fetch(`${apiUrl}/data`);
-        const jsonData = await response.json();
+        const jsonData: SensorData = await response.json();
         console.log(jsonData);
+        jsonData.luz = (jsonData.luz / 1023) * 100;
         setData(jsonData);
       } catch (error) {
         console.error("Error al obtener datos:", error);
@@ -142,8 +143,7 @@ function App() {
         variant="body2"
         color="textSecondary"
         align="center"
-        sx={{ mt: 3 }}
-      >
+        sx={{ mt: 3 }}>
         Autores: Gandhy Garcia, Kevin Caranqui, Erick Muñoz y Pablo Velez
       </Typography>
     </Box>
