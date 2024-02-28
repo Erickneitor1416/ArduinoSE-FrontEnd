@@ -37,7 +37,7 @@ function App() {
         const response = await fetch(`${apiUrl}/data`);
         const jsonData: SensorData = await response.json();
         console.log(jsonData);
-        jsonData.luz = (jsonData.luz / 1023) * 100;
+        jsonData.luz = Math.round((jsonData.luz / 1023) * 100);
         setData(jsonData);
       } catch (error) {
         console.error("Error al obtener datos:", error);
